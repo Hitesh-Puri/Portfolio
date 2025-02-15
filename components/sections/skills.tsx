@@ -93,7 +93,7 @@ const skillsData = {
   ],
 };
 
-export default function Skills() {
+export function Skills() {
   return (
     <section id="skills" className="py-20 bg-secondary/50">
       <div className="container px-4 mx-auto">

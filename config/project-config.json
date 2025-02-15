@@ -1,0 +1,44 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "name": "Portfolio",
+      "description": "Personal portfolio website built with Next.js, TypeScript, and Tailwind CSS",
+      "image": "/images/portfolio.png",
+      "liveDemo": "https://demo-project1.com",
+      "githubUrl": "https://github.com/hitesh-puri/Portfolio",
+      "topics": ["Next.js", "TypeScript", "Tailwind CSS"],
+      "language": "TypeScript"
+    },
+    {
+      "id": 2,
+      "name": "Pathfinding Algo",
+      "description": "A visualization tool for pathfinding algorithms like A*, Dijkstra's, and BFS",
+      "image": "/images/PathfindingAlgo.png",
+      "liveDemo": "https://demo-project3.com",
+      "githubUrl": "https://github.com/hitesh-puri/Pathfinding-Algo",
+      "topics": ["React", "Algorithms", "Visualization"],
+      "language": "JavaScript"
+    },
+    {
+      "id": 3,
+      "name": "Redux Filter Component",
+      "description": "Reusable filter component built with React and Redux",
+      "image": "/images/react-redux-filter.png",
+      "liveDemo": "https://demo-project4.com",
+      "githubUrl": "https://github.com/hitesh-puri/Redux-filter-component",
+      "topics": ["React", "Redux", "TypeScript"],
+      "language": "TypeScript"
+    },
+    {
+      "id": 4,
+      "name": "React Finance Tracker",
+      "description": "Personal finance tracking application with React",
+      "image": "/images/financeTracker.png",
+      "liveDemo": "https://demo-project5.com",
+      "githubUrl": "https://github.com/hitesh-puri/React-Finance-Tracker",
+      "topics": ["React", "Firebase", "ChartJS"],
+      "language": "JavaScript"
+    }
+  ]
+}

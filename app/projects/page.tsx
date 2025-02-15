@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-interface GitHubRepo {
+interface IGitHubRepo {
   id: number;
   name: string;
   description: string;
@@ -22,8 +22,42 @@ interface GitHubRepo {
   default_branch: string;
 }
 
+interface IProjectData {
+  id: number;
+  name: string;
+  image: string;
+  liveDemo: string;
+}
+
+const projectData: IProjectData[] = [
+  {
+    id: 1,
+    name: "Portfolio",
+    image: "/images/portfolio.png",
+    liveDemo: "https://demo-project1.com",
+  },
+  {
+    id: 2,
+    name: "Pathfinding Algo",
+    image: "/images/PathfindingAlgo.png",
+    liveDemo: "https://demo-project3.com",
+  },
+  {
+    id: 3,
+    name: "Redux Filter Component",
+    image: "/images/react-redux-filter.png",
+    liveDemo: "https://demo-project4.com",
+  },
+  {
+    id: 4,
+    name: "React Finance Tracker",
+    image: "/images/financeTracker.png",
+    liveDemo: "https://demo-project5.com",
+  },
+];
+
 export default function Projects() {
-  const [repos, setRepos] = useState<GitHubRepo[]>([]);
+  const [repos, setRepos] = useState<IGitHubRepo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -51,9 +85,22 @@ export default function Projects() {
   }, []);
 
   // Function to get repository image URL
-  const getRepoImage = (repo: GitHubRepo) => {
-    return `https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/${repo.default_branch}/screenshot.png`;
+  const getRepoImage = (repo: IGitHubRepo) => {
+    const projectInfo = projectData.find(
+      (project) => project.name.toLowerCase() === repo.name.toLowerCase()
+    );
+    return projectInfo?.image;
   };
+
+  // Function to get live demo URL
+  const getLiveDemo = (repo: IGitHubRepo) => {
+    const projectInfo = projectData.find(
+      (project) => project.name.toLowerCase() === repo.name.toLowerCase()
+    );
+    return projectInfo?.liveDemo || repo.homepage;
+  };
+
+  const fallbackImage = "/images/portfolio.png";
 
   return (
     <section id="projects" className="py-20 bg-secondary/50">
@@ -80,7 +127,9 @@ export default function Projects() {
 
                     {/* Project Image */}
                     <Image
-                      src={getRepoImage(project)}
+                      width={500}
+                      height={500}
+                      src={getRepoImage(project) || fallbackImage}
                       alt={project.name}
                       className="object-cover w-full h-full"
                       onError={(e) => {
@@ -90,13 +139,8 @@ export default function Projects() {
                     />
 
                     {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                      <motion.div
-                        initial={{ y: 20, opacity: 0 }}
-                        whileHover={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.2 }}
-                        className="flex gap-4"
-                      >
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
+                      <div className="flex gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                         <a
                           href={project.html_url}
                           target="_blank"
@@ -107,9 +151,9 @@ export default function Projects() {
                             Source Code
                           </Button>
                         </a>
-                        {project.homepage && (
+                        {getLiveDemo(project) && (
                           <a
-                            href={project.homepage}
+                            href={getLiveDemo(project)}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -119,7 +163,7 @@ export default function Projects() {
                             </Button>
                           </a>
                         )}
-                      </motion.div>
+                      </div>
                     </div>
                   </div>
 
